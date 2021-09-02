@@ -1,0 +1,3 @@
+[('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M')]
+[('RAFAEL AGUERO', 'CENTRAL', '72', 'M', 'F'), ('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'F')]
+[('MANUEL DELGADO', 'PURISCAL', '66', 'M', 'N'), ('MARIA SALAS', 'ATENAS', '42', 'F', 'N'), ('ISABEL VEGA', 'GOICOECHEA', '73', 'F', 'N')]

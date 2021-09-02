@@ -1,0 +1,3 @@
+[['JOSE', ' DELGADO', ' SANTA ANA', '  52', ' M', ' A\n'], ['CARMEN', ' CORRALES', ' GOICOECHEA', '  32', ' F', ' M\n']]
+[['RAFAEL', ' AGUERO', ' CENTRAL', '  72', ' M', ' F\n'], ['MARTA', ' VILLALTA', ' GOICOECHEA', '  71', ' F', ' F\n']]
+[['MANUEL', ' DELGADO', ' PURISCAL', '  66', ' M', ' N\n'], ['MARIA', ' SALAS', ' ATENAS', '  42', ' F', ' N\n'],['ISABEL', ' VEGA', ' GOICOECHEA', '  73', ' F', ' N']]
