@@ -38,42 +38,42 @@ def escrbir_razon (file, razon):
     La primera son Hombres Heterosexules, la segundd Mujeres Heterosexuales
     la tercera Hombres Homosexuales, la cuarta Mujeres Homosexuales
     la quinta Hombres Bisexuales, la sexta Mujeres Bisexuales"""
-def SepararPor (Lista, Dato):
-    if Dato == "Edad":
-        Personas_11_y_14 = []
-        Personas_15_y_17 = []
-        Personas_18_mas = []
-        for Persona in Lista:
-            if int(Persona[1]) < 15:
-                Personas_11_y_14 += [Persona]
-            elif int(Persona[1]) < 18:
-                Personas_15_y_17 += [Persona]
+def separar_por (lista, dato):
+    if dato == "Edad":
+        personas11_14 = []
+        personas15_17 = []
+        personas18 = []
+        for persona in lista:
+            if int(persona[1]) < 15:
+                personas11_14 += [persona]
+            elif int(persona[1]) < 18:
+                personas15_17 += [persona]
             else:
-                Personas_18_mas += [Persona]
-        ListaFinal = [Personas_11_y_14] + [Personas_15_y_17] + [Personas_18_mas]
+                personas18 += [persona]
+        listaFinal = [personas11_14] + [personas15_17] + [personas18]
     
-    elif Dato == "Genero":
-        HombresHetero = []
-        MujeresHetero = []
-        HombresHomo= []
-        MujeresHomo = []
-        HombresBi = []
-        MujeresBi = []
-        for Persona in Lista:
-            if Persona[2] == "M" and Persona[3] == "F":
-                HombresHetero += [Persona]
-            elif Persona[2] == "F" and Persona[3] == "M":
-                MujeresHetero += [Persona]
-            elif Persona[2] == "M" and Persona[3] == "M":
-                HombresHomo += [Persona]
-            elif Persona[2] == "F" and Persona[3] == "F":
-                MujeresHomo += [Persona]
-            elif Persona[2] == "M" and Persona[3] == "A":
-                HombresBi += [Persona]
-            elif Persona[2] == "F" and Persona[3] == "A":
-                MujeresBi += [Persona]
-        ListaFinal = [HombresHetero] + [MujeresHetero] + [HombresHomo] + [MujeresHomo] + [HombresBi] + [MujeresBi]
-    return ListaFinal
+    elif dato == "Genero":
+        heteroM = []
+        heteroF = []
+        homoM= []
+        homoF = []
+        biM = []
+        biF = []
+        for persona in lista:
+            if persona[2] == "M" and persona[3] == "F":
+                heteroM += [persona]
+            elif persona[2] == "F" and persona[3] == "M":
+                heteroF += [persona]
+            elif persona[2] == "M" and persona[3] == "M":
+                homoM += [persona]
+            elif persona[2] == "F" and persona[3] == "F":
+                homoF += [persona]
+            elif persona[2] == "M" and persona[3] == "A":
+                biM += [persona]
+            elif persona[2] == "F" and persona[3] == "A":
+                biF += [persona]
+        listaFinal = [heteroM] + [heteroF] + [homoM] + [homoF] + [biM] + [biF]
+    return listaFinal
   
 def descartar (lista):
     resultado = [[],[],[],[]]
@@ -108,21 +108,21 @@ def matching(listaPersonas, noParejas, fParejas, fNoParejas):
             persona = localidades[localidad][0]
             noParejas[2].append([persona[0],localidad,persona[1],persona[2],persona[3]])
         else:
-            ListaPorEdades = SepararPor(localidades[localidad],"Edad")
-            ListaPorEdades_Y_Sexo = []
-            for Edad in ListaPorEdades:
-                ListaPorEdades_Y_Sexo += [SepararPor(Edad,"Genero")]
-            for listaEdad in ListaPorEdades_Y_Sexo:
-                matchHetero(parejas,listaEdad[0],listaEdad[1], localidad)   #Primero matchea hombres hetero con mujeres hetero
-                matchHomo(parejas, listaEdad[2], localidad)                 #Match de hombres homosexuales
-                matchHomo(parejas, listaEdad[3], localidad)                 #Match de mujeres homosexuales
-                matchHetero(parejas, listaEdad[0], listaEdad[5], localidad) #Match de los hombres hetero que no pudieron formar pareja con mujeres bisexuales
-                matchHetero(parejas, listaEdad[1], listaEdad[4], localidad) #Match de las mujeres hetero que no pudieron formar pareja con hombres bisexuales
-                matchHetero(parejas, listaEdad[2], listaEdad[4], localidad) #Match de los hombres homosexuales que no pudieron formar pareja con hombres bisexuales
-                matchHetero(parejas, listaEdad[3], listaEdad[5], localidad) #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
-                bisexuales = listaEdad[4] + listaEdad[5]                    #Bisexuales que todavia no formaron pareja
+            listaEdades = separar_por(localidades[localidad],"Edad")
+            listaEdades_Sexo = []
+            for edad in listaEdades:
+                listaEdades_Sexo += [separar_por(edad,"Genero")]
+            for grupo in listaEdades_Sexo:
+                matchHetero(parejas,grupo[0],grupo[1], localidad)   #Primero matchea hombres hetero con mujeres hetero
+                matchHomo(parejas, grupo[2], localidad)                 #Match de hombres homosexuales
+                matchHomo(parejas, grupo[3], localidad)                 #Match de mujeres homosexuales
+                matchHetero(parejas, grupo[0], grupo[5], localidad) #Match de los hombres hetero que no pudieron formar pareja con mujeres bisexuales
+                matchHetero(parejas, grupo[1], grupo[4], localidad) #Match de las mujeres hetero que no pudieron formar pareja con hombres bisexuales
+                matchHetero(parejas, grupo[2], grupo[4], localidad) #Match de los hombres homosexuales que no pudieron formar pareja con hombres bisexuales
+                matchHetero(parejas, grupo[3], grupo[5], localidad) #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
+                bisexuales = grupo[4] + grupo[5]                    #Bisexuales que todavia no formaron pareja
                 matchHomo(parejas, bisexuales, localidad)                   #Match personas bisexuales
-                for persona in listaEdad[0] + listaEdad[1] + listaEdad[2] + listaEdad[3] + bisexuales:
+                for persona in grupo[0] + grupo[1] + grupo[2] + grupo[3] + bisexuales:
                     noParejas[3].append([persona[0], localidad, persona[1], persona[2], persona[3]])
     
     with open(fParejas, "w") as fileParejas:
