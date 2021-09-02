@@ -1,3 +1,5 @@
+import argparse
+
 """ Diseño de datos:
     Para representar a las personas usamos una tupla de 5 elementos de la siguiente forma:
     (NombreYApellido,Localidad,Edad,Genero,Interes) donde todos los datos personal de cada persona
@@ -10,11 +12,11 @@
 """ Pasar_a_tupla: Lista(Lista(Strings)) --> Lista(Tuplas)
     Recibe una lista de listas de strings, a cada lista de la lista la pasa a una tupla con sus strings
     sin los espacios o caracteres inncesarios, por eso utilizamos la funcion strip"""
-def Pasar_a_Tupla(Lista):
-    NuevaLista = []
-    for [Nombre,Apellido,Localidad,Edad,Genero,Interes] in Lista:
-        NuevaLista += [(Nombre.strip()+" "+Apellido.strip(),Localidad.strip(),Edad.strip(),Genero.strip(),Interes.strip())]
-    return NuevaLista
+def normalizar_lista(lista):
+    nuevaLista = []
+    for [nombre, apellido, localidad, edad, genero, interes] in lista:
+        nuevaLista += [nombre.strip() + " " + apellido.strip(), localidad.strip(), edad.strip(), genero.strip(), interes.strip()]
+    return nuevaLista
 """ EliminarDeLaLista: List List
     Toma una lista y una lista subconjunto de la primera, elimina de la primer lista todos los elementos de la segunda
     "difererencia de conjuntos".
@@ -174,11 +176,28 @@ def Matching(Diccionario):
 #FUNCION PRINCIPAL
 """dado que en el archivo de entrada, cada linea representa los datos de una persona, los mismos estan separados por una coma, y al leer el archivo se obtiene un string de la linea entera,
 para obtener una lista de sus datos aislados en forma de string, utilizamos la funcion split(,) para que los separe"""
-def Match ():
-    NombreArchivo = input("Ingrese el nombre del archivo de personas a usar en este programa: ")
-    EntradaFile = open(NombreArchivo,"r")
-    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda cadena: cadena.split(","),EntradaFile.readlines())))
-    EntradaFile.close()
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "entrada",
+        help= "Nombre archivo de entrada"
+    )
+    parser.add_argument(
+        "parejas",
+        help="Nombre archivo de salida con parejas"
+    )
+    parser.add_argument(
+        "noParejas",
+        help="Nombre archivo de salida con quienes no formaron pareja"
+    )
+
+    args = parser.parse_args()
+
+    with open(args.entrada, "r") as entradaFile:
+        listaPersonas = list(map(lambda string: string.split(","), entradaFile.readlines()))
+        listaPersonas = normalizar_lista(listaPersonas)
+        
     NoParejasFile = open("SalidaNoParejas.txt","w")
     Menores_de_Edad = Descartados(Lista_de_Personas,"Menores")
     EscribirNoPareja(NoParejasFile,Menores_de_Edad,"Menores")
@@ -191,4 +210,7 @@ def Match ():
     EscribirNoPareja(NoParejasFile,NoParejas[0],"Unicos")
     EscribirNoPareja(NoParejasFile,NoParejas[1],"Solteros")
     NoParejasFile.close()
-Match()
+
+
+if __name__ == "__main__":
+    main()
