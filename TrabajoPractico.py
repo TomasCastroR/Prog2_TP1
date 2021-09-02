@@ -1,14 +1,5 @@
 import argparse
 
-""" Diseño de datos:
-    Para representar a las personas usamos una tupla de 5 elementos de la siguiente forma:
-    (NombreYApellido,Localidad,Edad,Genero,Interes) donde todos los datos personal de cada persona
-    son representados a traves de un string
-    
-    Luego,las localidades y las personas que residen en ella, las representamos con un diccionario donde las keys seran las distintas
-    localidades y los valores asociados una lista de personas representadas por una tupla de 4 elementos que son sus datos en forma de string
-    (NombreYApellido,Edad,Genero,Interes)"""
-
 def normalizar_lista(lista):
     nuevaLista = []
     for [nombre, apellido, localidad, edad, genero, interes] in lista:
@@ -18,7 +9,6 @@ def normalizar_lista(lista):
 def eliminar_sublista (lista1, lista2):
     for elem in lista2:
             lista1.remove(elem) 
-
 
 def diccionario_localidades(lista):
     localidades = {}
@@ -123,15 +113,15 @@ def matching(listaPersonas, noParejas, fParejas, fNoParejas):
             for Edad in ListaPorEdades:
                 ListaPorEdades_Y_Sexo += [SepararPor(Edad,"Genero")]
             for listaEdad in ListaPorEdades_Y_Sexo:
-                matchHetero(parejas,listaEdad[0],listaEdad[1], localidad) #Primero matchea hombres hetero con mujeres hetero
-                matchHomo(parejas, listaEdad[2], localidad)                #Match de hombres homosexuales
-                matchHomo(parejas, listaEdad[3], localidad)                #Match de mujeres homosexuales
+                matchHetero(parejas,listaEdad[0],listaEdad[1], localidad)   #Primero matchea hombres hetero con mujeres hetero
+                matchHomo(parejas, listaEdad[2], localidad)                 #Match de hombres homosexuales
+                matchHomo(parejas, listaEdad[3], localidad)                 #Match de mujeres homosexuales
                 matchHetero(parejas, listaEdad[0], listaEdad[5], localidad) #Match de los hombres hetero que no pudieron formar pareja con mujeres bisexuales
                 matchHetero(parejas, listaEdad[1], listaEdad[4], localidad) #Match de las mujeres hetero que no pudieron formar pareja con hombres bisexuales
                 matchHetero(parejas, listaEdad[2], listaEdad[4], localidad) #Match de los hombres homosexuales que no pudieron formar pareja con hombres bisexuales
                 matchHetero(parejas, listaEdad[3], listaEdad[5], localidad) #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
-                bisexuales = listaEdad[4] + listaEdad[5]                       #Bisexuales que todavia no formaron pareja
-                matchHomo(parejas, bisexuales, localidad)         #Match personas bisexuales
+                bisexuales = listaEdad[4] + listaEdad[5]                    #Bisexuales que todavia no formaron pareja
+                matchHomo(parejas, bisexuales, localidad)                   #Match personas bisexuales
                 for persona in listaEdad[0] + listaEdad[1] + listaEdad[2] + listaEdad[3] + bisexuales:
                     noParejas[3].append([persona[0], localidad, persona[1], persona[2], persona[3]])
     
@@ -140,7 +130,7 @@ def matching(listaPersonas, noParejas, fParejas, fNoParejas):
             fileParejas.write("{0}, {1}, {2}, {3} -- {4}, {5}, {6}, {7} -- {8}\n".format(persona1[0],persona1[1],persona1[2],persona1[3],
                                                                                          persona2[0],persona2[1],persona2[2],persona2[3],localidad))
     with open(fNoParejas, "w") as fileNoParejas:
-        for index in range(0,3):
+        for index in range(4):
             escrbir_razon (fileNoParejas, index)
             for [nombreApellido, localidad, edad, genero, interes] in noParejas[index]:
                 fileNoParejas.write("{0}, {1}, {2}, {3}, {4}\n".format(nombreApellido, localidad, edad, genero, interes))     
