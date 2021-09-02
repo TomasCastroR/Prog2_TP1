@@ -1,0 +1,4 @@
+[('JOSE DELGADO', '13', 'M', 'A'), ('CARMEN CORRALES','17', 'F', 'M'),('RAFAEL AGUERO','72', 'M', 'F')]
+[('JOSE DELGADO', '13', 'M', 'A'), ('CARMEN CORRALES','14', 'F', 'M'),('RAFAEL AGUERO','12', 'M', 'F')]
+[('JOSE DELGADO', '13', 'M', 'F'), ('CARMEN CORRALES','14', 'F', 'M'),('RAFAEL AGUERO','12', 'M', 'M'),('MANUEL DELGADO', '66', 'M', 'A'), ('MARIA SALAS', '42', 'F', 'F'), ('ISABEL VEGA',  '73', 'F', 'A')]
+[('JOSE DELGADO', '13', 'M', 'M'), ('CARMEN CORRALES','14', 'F', 'A'),('RAFAEL AGUERO','12', 'M', 'M'),('MANUEL DELGADO', '66', 'M', 'A'), ('MARIA SALAS', '42', 'F', 'F'), ('ISABEL VEGA',  '73', 'F', 'A')]

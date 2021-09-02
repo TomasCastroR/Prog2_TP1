@@ -1,0 +1,2 @@
+[('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M'), ('RAFAEL AGUERO', 'CENTRAL', '72', 'M', 'F'), ('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'F')]
+[('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'SANTA ANA', '32', 'F', 'M'),('RAFAEL AGUERO', 'SANTA ANA', '72', 'M', 'F')]
