@@ -1,2 +1,0 @@
-[('JOSE DELGADO', 'SANTA ANA', '9', 'M', 'N'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M'),('RAFAEL AGUERO', 'CENTRAL', '10', 'M', 'F'), ('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'N')]
-[('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M')]
