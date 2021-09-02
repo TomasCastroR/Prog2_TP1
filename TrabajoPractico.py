@@ -60,18 +60,20 @@ def separar_por (lista, dato):
         biM = []
         biF = []
         for persona in lista:
-            if persona[2] == "M" and persona[3] == "F":
-                heteroM += [persona]
-            elif persona[2] == "F" and persona[3] == "M":
-                heteroF += [persona]
-            elif persona[2] == "M" and persona[3] == "M":
-                homoM += [persona]
-            elif persona[2] == "F" and persona[3] == "F":
-                homoF += [persona]
-            elif persona[2] == "M" and persona[3] == "A":
-                biM += [persona]
-            elif persona[2] == "F" and persona[3] == "A":
-                biF += [persona]
+            if persona[2] == "M":
+                if persona[3] == "F":
+                    heteroM += [persona]
+                elif persona[3] == "M":
+                    homoM += [persona]
+                else:
+                    biM += [persona]
+            else:
+                if persona[3] == "F":
+                    heteroF += [persona]
+                elif persona[3] == "M":
+                    homoF += [persona]
+                else:
+                    biF += [persona]
         listaFinal = [heteroM] + [heteroF] + [homoM] + [homoF] + [biM] + [biF]
     return listaFinal
   
