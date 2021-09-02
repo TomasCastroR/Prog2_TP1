@@ -15,15 +15,16 @@ import argparse
 def normalizar_lista(lista):
     nuevaLista = []
     for [nombre, apellido, localidad, edad, genero, interes] in lista:
-        nuevaLista += [nombre.strip() + " " + apellido.strip(), localidad.strip(), edad.strip(), genero.strip(), interes.strip()]
+        nuevaLista.append([nombre.strip() + " " + apellido.strip(), localidad.strip(), edad.strip(), genero.strip(), interes.strip()])
     return nuevaLista
+
 """ EliminarDeLaLista: List List
     Toma una lista y una lista subconjunto de la primera, elimina de la primer lista todos los elementos de la segunda
     "difererencia de conjuntos".
     Utilizamos remove, el cual sirve para poder eliminar un objeto a seleccionar de una lista """
-def EliminarDeLaLista(ListaPrincipal,Lista_a_sacar):
-    for Persona in Lista_a_sacar:
-            ListaPrincipal.remove(Persona) 
+def eliminar_sublista (lista1, lista2):
+    for elem in lista2:
+            lista1.remove(elem) 
 
 """Crear_Diccionario_de_Localidades: Lista(Tuplas) --> Dictionary
    Toma una Lista de tuplas de personas, retorna un diccionario donde las keys son localidades y sus valores asociados una lista de
@@ -108,18 +109,18 @@ def SepararPor (Lista, Dato):
 """ Descartados: Lista(Tuplas) String --> Lista(Tuplas)
     Recibe una lista de tuplas de personas y una condicion de descarte, si es la persona es menor de 10 años o si es asexual,
     devuelve una lista de tuplas de personas que cumplan con la condicion"""   
-def Descartados (ListaDePersonas,Condicion):
-    ListaDeTipo = []
-    if Condicion == "Menores":
-        for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:      
-            if int(Edad) <= 10:
-                ListaDeTipo += [(NombreYApellido,Localidad,Edad,Genero,Interes)]
+def descartar (lista):
+    resultado = [[],[]]
+    for (nombreApellido, localidad, edad, genero, interes) in lista:      
+        if int(edad) <= 10:
+            resultado[0].append([nombreApellido,localidad, edad, genero, interes])
+    eliminar_sublista (lista, resultado[0])
+    for (nombreApellido, localidad, edad, genero, interes) in lista:
+        if interes == "N":
+            resultado[1].append([nombreApellido, localidad, edad, genero, interes])
+    eliminar_sublista (lista, resultado[1])
+    return resultado
 
-    elif Condicion == "Asexuales":
-        for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
-            if Interes == "N":
-                ListaDeTipo += [(NombreYApellido,Localidad,Edad,Genero,Interes)]
-    return ListaDeTipo
 """ MatchearHeterosexuales: File List(Tuplas) List(Tuplas) String
     Recibe un Archivo, dos listas de Genero e Interes y la localidad donde se encuentra.
     Empareja los primeros elementos de cada lista escribiendolos sobre el archivo y luego
@@ -144,7 +145,7 @@ def MatchearHomosexuales (Archivo,lista, localidad):
     Al mismo tiempo, forma una lista de dos listas donde la primera contiene todos los nombres de las personas
     que estan solas en su localidad y la otra, los nombres de las personas que no pudieron formar pareja.
     Retorna esa lista""" 
-def Matching(Diccionario):
+def matching(Diccionario):
     PersonasUnicas = []
     PersonasSolteras = []
     ParejasFile = open("SalidaParejas.txt","w")
@@ -194,22 +195,14 @@ def main():
 
     args = parser.parse_args()
 
-    with open(args.entrada, "r") as entradaFile:
+    with open(args.entrada, "r", encoding="utf-8") as entradaFile:
         listaPersonas = list(map(lambda string: string.split(","), entradaFile.readlines()))
-        listaPersonas = normalizar_lista(listaPersonas)
-        
-    NoParejasFile = open("SalidaNoParejas.txt","w")
-    Menores_de_Edad = Descartados(Lista_de_Personas,"Menores")
-    EscribirNoPareja(NoParejasFile,Menores_de_Edad,"Menores")
-    EliminarDeLaLista(Lista_de_Personas,Menores_de_Edad)
-    Asexuales = Descartados(Lista_de_Personas,"Asexuales")
-    EscribirNoPareja(NoParejasFile,Asexuales,"Asexuales")
-    EliminarDeLaLista(Lista_de_Personas,Asexuales)
-    DiccionarioPorLocalidades = Crear_Diccionario_de_Localidades(Lista_de_Personas)
-    NoParejas = Matching(DiccionarioPorLocalidades) 
-    EscribirNoPareja(NoParejasFile,NoParejas[0],"Unicos")
-    EscribirNoPareja(NoParejasFile,NoParejas[1],"Solteros")
-    NoParejasFile.close()
+
+    listaPersonas = normalizar_lista(listaPersonas)       
+    noParejas = descartar(listaPersonas)
+    #localidades = Crear_Diccionario_de_Localidades(listaPersonas)
+    #matching(localidades)
+
 
 
 if __name__ == "__main__":
