@@ -142,8 +142,7 @@ def matching(listaPersonas, fParejas, fNoParejas):
                 matchHetero(parejas, grupo[3], grupo[5]) #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
                 bisexuales = grupo[4] + grupo[5]                    #Bisexuales que todavia no formaron pareja
                 matchHomo(parejas, bisexuales)                   #Match personas bisexuales
-                for persona in grupo[0] + grupo[1] + grupo[2] + grupo[3] + bisexuales:
-                    noParejas[3].append(persona)
+                noParejas[3] += grupo[0] + grupo[1] + grupo[2] + grupo[3] + bisexuales
     escribir_parejas (parejas, fParejas)
     escrbir_no_parejas (noParejas, fNoParejas)
                 
