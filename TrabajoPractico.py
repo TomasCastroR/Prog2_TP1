@@ -48,9 +48,9 @@ def separar_por (lista, dato):
         personas15_17 = []
         personas18 = []
         for persona in lista:
-            if int(persona[1]) < 15:
+            if int(persona[3]) < 15:
                 personas11_14 += [persona]
-            elif int(persona[1]) < 18:
+            elif int(persona[3]) < 18:
                 personas15_17 += [persona]
             else:
                 personas18 += [persona]
@@ -64,17 +64,17 @@ def separar_por (lista, dato):
         biM = []
         biF = []
         for persona in lista:
-            if persona[2] == "M":
-                if persona[3] == "F":
+            if persona[4] == "M":
+                if persona[5] == "F":
                     heteroM += [persona]
-                elif persona[3] == "M":
+                elif persona[5] == "M":
                     homoM += [persona]
                 else:
                     biM += [persona]
             else:
-                if persona[3] == "M":
+                if persona[5] == "M":
                     heteroF += [persona]
-                elif persona[3] == "F":
+                elif persona[5] == "F":
                     homoF += [persona]
                 else:
                     biF += [persona]
@@ -83,27 +83,40 @@ def separar_por (lista, dato):
   
 def descartar (lista):
     resultado = [[],[],[],[]]
-    for (nombreApellido, localidad, edad, genero, interes) in lista:      
-        if int(edad) <= 10:
-            resultado[0].append([nombreApellido,localidad, edad, genero, interes])
+    for persona in lista:      
+        if int(persona[3]) <= 10:
+            resultado[0].append(persona)
     eliminar_sublista (lista, resultado[0])
-    for (nombreApellido, localidad, edad, genero, interes) in lista:
-        if interes == "N":
-            resultado[1].append([nombreApellido, localidad, edad, genero, interes])
+    for persona in lista:
+        if persona[5] == "N":
+            resultado[1].append(persona)
     eliminar_sublista (lista, resultado[1])
     return resultado
 
-def matchHetero (parejas, lista1, lista2, localidad):
+def matchHetero (parejas, lista1, lista2):
     while lista1!=[] and lista2!=[]:
-        parejas.append([lista1[0],lista2[0],localidad])
+        parejas.append([lista1[0],lista2[0]])
         lista1.remove(lista1[0])
         lista2.remove(lista2[0])
 
-def matchHomo (parejas, lista, localidad):
+def matchHomo (parejas, lista):
     while lista != [] and len(lista)!= 1:
-        parejas.append([lista[0],lista[1],localidad])
+        parejas.append([lista[0],lista[1]])
         lista.remove(lista[0])
         lista.remove(lista[0])
+
+def escribir_parejas (parejas, fParejas):
+    with open(fParejas, "w") as fileParejas:
+        for [persona1, persona2] in parejas:
+            fileParejas.write("{0}, {1}, {2}, {3} -- {4}, {5}, {6}, {7} -- {8}\n".format(persona1[0],persona1[1],persona1[2],persona1[3],
+                                                                                         persona2[0],persona2[1],persona2[2],persona2[3],persona1[2]))
+
+def escrbir_no_parejas(noParejas, fNoParejas):
+    with open(fNoParejas, "w") as fileNoParejas:
+        for index in range(4):
+            escrbir_razon (fileNoParejas, index)
+            for [nombre, apellido, localidad, edad, genero, interes] in noParejas[index]:
+                fileNoParejas.write("{0}, {1}, {2}, {3}, {4}, {5}\n".format(nombre, apellido, localidad, edad, genero, interes))
 
 def matching(listaPersonas, fParejas, fNoParejas):
     localidades = diccionario_localidades(listaPersonas)
@@ -120,27 +133,19 @@ def matching(listaPersonas, fParejas, fNoParejas):
             for edad in listaEdades:
                 listaEdades_Sexo += [separar_por(edad,"Genero")]
             for grupo in listaEdades_Sexo:
-                matchHetero(parejas,grupo[0],grupo[1], localidad)   #Primero matchea hombres hetero con mujeres hetero
-                matchHomo(parejas, grupo[2], localidad)                 #Match de hombres homosexuales
-                matchHomo(parejas, grupo[3], localidad)                 #Match de mujeres homosexuales
-                matchHetero(parejas, grupo[0], grupo[5], localidad) #Match de los hombres hetero que no pudieron formar pareja con mujeres bisexuales
-                matchHetero(parejas, grupo[1], grupo[4], localidad) #Match de las mujeres hetero que no pudieron formar pareja con hombres bisexuales
-                matchHetero(parejas, grupo[2], grupo[4], localidad) #Match de los hombres homosexuales que no pudieron formar pareja con hombres bisexuales
-                matchHetero(parejas, grupo[3], grupo[5], localidad) #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
+                matchHetero(parejas,grupo[0],grupo[1])   #Primero matchea hombres hetero con mujeres hetero
+                matchHomo(parejas, grupo[2])                 #Match de hombres homosexuales
+                matchHomo(parejas, grupo[3])                 #Match de mujeres homosexuales
+                matchHetero(parejas, grupo[0], grupo[5]) #Match de los hombres hetero que no pudieron formar pareja con mujeres bisexuales
+                matchHetero(parejas, grupo[1], grupo[4]) #Match de las mujeres hetero que no pudieron formar pareja con hombres bisexuales
+                matchHetero(parejas, grupo[2], grupo[4]) #Match de los hombres homosexuales que no pudieron formar pareja con hombres bisexuales
+                matchHetero(parejas, grupo[3], grupo[5]) #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
                 bisexuales = grupo[4] + grupo[5]                    #Bisexuales que todavia no formaron pareja
-                matchHomo(parejas, bisexuales, localidad)                   #Match personas bisexuales
+                matchHomo(parejas, bisexuales)                   #Match personas bisexuales
                 for persona in grupo[0] + grupo[1] + grupo[2] + grupo[3] + bisexuales:
-                    noParejas[3].append([persona[0], localidad, persona[1], persona[2], persona[3]])
-    
-    with open(fParejas, "w") as fileParejas:
-        for [persona1, persona2, localidad] in parejas:
-            fileParejas.write("{0}, {1}, {2}, {3} -- {4}, {5}, {6}, {7} -- {8}\n".format(persona1[0],persona1[1],persona1[2],persona1[3],
-                                                                                         persona2[0],persona2[1],persona2[2],persona2[3],localidad))
-    with open(fNoParejas, "w") as fileNoParejas:
-        for index in range(4):
-            escrbir_razon (fileNoParejas, index)
-            for [nombreApellido, localidad, edad, genero, interes] in noParejas[index]:
-                fileNoParejas.write("{0}, {1}, {2}, {3}, {4}\n".format(nombreApellido, localidad, edad, genero, interes))     
+                    noParejas[3].append(persona)
+    escribir_parejas (parejas, fParejas)
+    escrbir_no_parejas (noParejas, fNoParejas)
                 
 def main():
     parser = argparse.ArgumentParser()
