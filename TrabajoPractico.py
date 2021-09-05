@@ -1,10 +1,14 @@
 import argparse
 
-def normalizar_lista(lista):
-    nuevaLista = []
+def leer_entrada(fEntrada):
+    with open(fEntrada, "r", encoding="utf-8") as entradaFile:
+        lista = entradaFile.readlines()
+    lista = list(map(lambda cadena: cadena.split(","), lista))
+    listaPersonas = []
     for [nombre, apellido, localidad, edad, genero, interes] in lista:
-        nuevaLista.append([nombre.strip() + " " + apellido.strip(), localidad.strip(), edad.strip(), genero.strip(), interes.strip()])
-    return nuevaLista
+        persona = list(map(lambda cadena: cadena.strip(), persona))
+        listaPersonas.append(persona)
+    return listaPersonas
 
 def eliminar_sublista (lista1, lista2):
     for elem in lista2:
@@ -156,10 +160,7 @@ def main():
 
     args = parser.parse_args()
 
-    with open(args.entrada, "r", encoding="utf-8") as entradaFile:
-        listaPersonas = list(map(lambda string: string.split(","), entradaFile.readlines()))
-
-    listaPersonas = normalizar_lista(listaPersonas)       
+    listaPersonas = leer_entrada(args.entrada)       
     matching(listaPersonas, args.parejas, args.noParejas)
 
 if __name__ == "__main__":
