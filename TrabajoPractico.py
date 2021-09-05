@@ -101,8 +101,9 @@ def matchHomo (parejas, lista, localidad):
         lista.remove(lista[0])
         lista.remove(lista[0])
 
-def matching(listaPersonas, noParejas, fParejas, fNoParejas):
+def matching(listaPersonas, fParejas, fNoParejas):
     localidades = diccionario_localidades(listaPersonas)
+    noParejas = descartar(listaPersonas)
     listaPersonas.clear()
     parejas = []
     for localidad in localidades.keys():
@@ -159,8 +160,7 @@ def main():
         listaPersonas = list(map(lambda string: string.split(","), entradaFile.readlines()))
 
     listaPersonas = normalizar_lista(listaPersonas)       
-    noParejas = descartar(listaPersonas)
-    matching(listaPersonas, noParejas, args.parejas, args.noParejas)
+    matching(listaPersonas, args.parejas, args.noParejas)
 
 if __name__ == "__main__":
     main()
