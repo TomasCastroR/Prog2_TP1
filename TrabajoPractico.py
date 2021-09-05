@@ -12,11 +12,11 @@ def eliminar_sublista (lista1, lista2):
 
 def diccionario_localidades(lista):
     localidades = {}
-    for (nombreApellido, localidad, edad, genero, interes) in lista:
-        if localidad in localidades.keys():
-            localidades[localidad].append([nombreApellido, edad, genero, interes])
+    for persona in lista:
+        if persona[2] in localidades.keys():
+            localidades[persona[2]].append(persona)
         else:
-            localidades[localidad] = [[nombreApellido, edad, genero, interes]]
+            localidades[persona[2]] = [persona]
     return localidades
 
 def escrbir_razon (file, razon):
