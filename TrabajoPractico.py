@@ -68,9 +68,9 @@ def separar_por (lista, dato):
                 else:
                     biM += [persona]
             else:
-                if persona[3] == "F":
+                if persona[3] == "M":
                     heteroF += [persona]
-                elif persona[3] == "M":
+                elif persona[3] == "F":
                     homoF += [persona]
                 else:
                     biF += [persona]
