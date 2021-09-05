@@ -5,7 +5,7 @@ def leer_entrada(fEntrada):
         lista = entradaFile.readlines()
     lista = list(map(lambda cadena: cadena.split(","), lista))
     listaPersonas = []
-    for [nombre, apellido, localidad, edad, genero, interes] in lista:
+    for persona in lista:
         persona = list(map(lambda cadena: cadena.strip(), persona))
         listaPersonas.append(persona)
     return listaPersonas
@@ -27,11 +27,11 @@ def escrbir_razon (file, razon):
     if razon == 0:
         file.write("Estas personas no formaron parejas por ser menores de 10 años\n")
     elif razon == 1:
-        file.write("Estas personas no formaron parejas por ser asexuales\n")
+        file.write("\nEstas personas no formaron parejas por ser asexuales\n")
     elif razon == 2:
-        file.write("Estas personas no pudieron formar pareja por ser las unicas en su localidad\n")
+        file.write("\nEstas personas no pudieron formar pareja por ser las unicas en su localidad\n")
     elif razon == 3:
-        file.write("Estas personas no pudieron formar pareja en su localidad\n")
+        file.write("\nEstas personas no pudieron formar pareja en su localidad\n")
 
 
 """ SepararPor: Lista(Tuplas) String ---> Lista(Listas(Tuplas))
@@ -108,8 +108,8 @@ def matchHomo (parejas, lista):
 def escribir_parejas (parejas, fParejas):
     with open(fParejas, "w") as fileParejas:
         for [persona1, persona2] in parejas:
-            fileParejas.write("{0}, {1}, {2}, {3} -- {4}, {5}, {6}, {7} -- {8}\n".format(persona1[0],persona1[1],persona1[2],persona1[3],
-                                                                                         persona2[0],persona2[1],persona2[2],persona2[3],persona1[2]))
+            fileParejas.write("{0}, {1}, {2}, {3}, {4} -- {5}, {6}, {7}, {8}, {9} -- {10}\n".format(persona1[0],persona1[1],persona1[3],persona1[4],persona1[5],
+                                                                                         persona2[0],persona2[1],persona2[3],persona2[4],persona2[5],persona1[2]))
 
 def escrbir_no_parejas(noParejas, fNoParejas):
     with open(fNoParejas, "w") as fileNoParejas:
@@ -119,14 +119,14 @@ def escrbir_no_parejas(noParejas, fNoParejas):
                 fileNoParejas.write("{0}, {1}, {2}, {3}, {4}, {5}\n".format(nombre, apellido, localidad, edad, genero, interes))
 
 def matching(listaPersonas, fParejas, fNoParejas):
-    localidades = diccionario_localidades(listaPersonas)
     noParejas = descartar(listaPersonas)
+    localidades = diccionario_localidades(listaPersonas)
     listaPersonas.clear()
     parejas = []
     for localidad in localidades.keys():
         if len(localidades[localidad]) == 1:
             persona = localidades[localidad][0]
-            noParejas[2].append([persona[0],localidad,persona[1],persona[2],persona[3]])
+            noParejas[2].append(persona)
         else:
             listaEdades = separar_por(localidades[localidad],"Edad")
             listaEdades_Sexo = []
