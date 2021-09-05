@@ -133,14 +133,14 @@ def matching(listaPersonas, fParejas, fNoParejas):
             for edad in listaEdades:
                 listaEdades_Sexo += [separar_por(edad,"Genero")]
             for grupo in listaEdades_Sexo:
-                matchHetero(parejas,grupo[0],grupo[1])   #Primero matchea hombres hetero con mujeres hetero
-                matchHomo(parejas, grupo[2])                 #Match de hombres homosexuales
-                matchHomo(parejas, grupo[3])                 #Match de mujeres homosexuales
-                matchHetero(parejas, grupo[0], grupo[5]) #Match de los hombres hetero que no pudieron formar pareja con mujeres bisexuales
-                matchHetero(parejas, grupo[1], grupo[4]) #Match de las mujeres hetero que no pudieron formar pareja con hombres bisexuales
-                matchHetero(parejas, grupo[2], grupo[4]) #Match de los hombres homosexuales que no pudieron formar pareja con hombres bisexuales
-                matchHetero(parejas, grupo[3], grupo[5]) #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
-                bisexuales = grupo[4] + grupo[5]                    #Bisexuales que todavia no formaron pareja
+                matchHetero(parejas,grupo[0],grupo[1])           #Primero matchea hombres hetero con mujeres hetero
+                matchHomo(parejas, grupo[2])                     #Match de hombres homosexuales
+                matchHomo(parejas, grupo[3])                     #Match de mujeres homosexuales
+                matchHetero(parejas, grupo[0], grupo[5])         #Match de los hombres hetero que no pudieron formar pareja con mujeres bisexuales
+                matchHetero(parejas, grupo[1], grupo[4])         #Match de las mujeres hetero que no pudieron formar pareja con hombres bisexuales
+                matchHetero(parejas, grupo[2], grupo[4])         #Match de los hombres homosexuales que no pudieron formar pareja con hombres bisexuales
+                matchHetero(parejas, grupo[3], grupo[5])         #Match de los mujeres homosexuales que no pudieron formar pareja con mujeres bisexuales
+                bisexuales = grupo[4] + grupo[5]                 #Bisexuales que todavia no formaron pareja
                 matchHomo(parejas, bisexuales)                   #Match personas bisexuales
                 noParejas[3] += grupo[0] + grupo[1] + grupo[2] + grupo[3] + bisexuales
     escribir_parejas (parejas, fParejas)
