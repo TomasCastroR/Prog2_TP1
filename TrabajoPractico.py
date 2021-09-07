@@ -97,17 +97,18 @@ def matchHomo (parejas, lista):
         lista.remove(lista[0])
 
 def escribir_parejas (parejas, fParejas):
-    with open(fParejas, "w") as fileParejas:
+    with open(fParejas, "w", encoding="utf-8") as fileParejas:
         for [persona1, persona2] in parejas:
-            fileParejas.write("{0}, {1}, {2}, {3}, {4} -- {5}, {6}, {7}, {8}, {9} -- {10}\n".format(persona1[0],persona1[1],persona1[3],persona1[4],persona1[5],
-                                                                                         persona2[0],persona2[1],persona2[3],persona2[4],persona2[5],persona1[2]))
+            nombre1, apellido1, localidad1, edad1, genero1, interes1 = persona1
+            nombre2, apellido2, localidad2, edad2, genero2, interes2 = persona2
+            fileParejas.write(f"{nombre1}, {apellido1}, {edad1}, {genero1}, {interes1} -- {nombre2}, {apellido2}, {edad2}, {genero2}, {interes2} -- {localidad1}\n")
 
 def escrbir_no_parejas(noParejas, fNoParejas):
-    with open(fNoParejas, "w") as fileNoParejas:
+    with open(fNoParejas, "w", encoding="utf-8") as fileNoParejas:
         for index in range(4):
             escrbir_razon (fileNoParejas, index)
             for [nombre, apellido, localidad, edad, genero, interes] in noParejas[index]:
-                fileNoParejas.write("{0}, {1}, {2}, {3}, {4}, {5}\n".format(nombre, apellido, localidad, edad, genero, interes))
+                fileNoParejas.write(f"{nombre}, {apellido}, {localidad}, {edad}, {genero}, {interes}\n")
 
 def matching(listaPersonas, fParejas, fNoParejas):
     noParejas = descartar(listaPersonas)
