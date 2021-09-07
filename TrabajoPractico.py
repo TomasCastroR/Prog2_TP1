@@ -12,7 +12,7 @@ def leer_entrada(fEntrada):
 
 def eliminar_sublista (lista1, lista2):
     for elem in lista2:
-            lista1.remove(elem) 
+        lista1.remove(elem) 
 
 def diccionario_localidades(lista):
     localidades = {}
@@ -33,15 +33,6 @@ def escrbir_razon (file, razon):
     elif razon == 3:
         file.write("\nEstas personas no pudieron formar pareja en su localidad\n")
 
-
-""" SepararPor: Lista(Tuplas) String ---> Lista(Listas(Tuplas))
-    Recibe una lista de tuplas y forma una lista de lista de tuplas segun el Dato.
-    Si el Dato es Edad, crea una lista de 3 listas donde cada una representa un grupo etario
-    la primera de 11 a 14 años, la segunda de 15 a 17 años y la tercera de 18 años en adelante
-    Si el Dato es Sexo, crea una lista de 6 listas donde cada representa a un genero y su interes
-    La primera son Hombres Heterosexules, la segundd Mujeres Heterosexuales
-    la tercera Hombres Homosexuales, la cuarta Mujeres Homosexuales
-    la quinta Hombres Bisexuales, la sexta Mujeres Bisexuales"""
 def separar_por (lista, dato):
     if dato == "Edad":
         personas11_14 = []
@@ -121,7 +112,6 @@ def escrbir_no_parejas(noParejas, fNoParejas):
 def matching(listaPersonas, fParejas, fNoParejas):
     noParejas = descartar(listaPersonas)
     localidades = diccionario_localidades(listaPersonas)
-    listaPersonas.clear()
     parejas = []
     for localidad in localidades.keys():
         if len(localidades[localidad]) == 1:
