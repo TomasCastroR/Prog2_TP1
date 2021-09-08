@@ -14,7 +14,13 @@ class TestMatching (unittest.TestCase):
             path = "test_entrada/" + archivos[idx].strip()
             self.assertEqual(leer_entrada(path), eval(res[idx]))
     def test_diccionario_localidades (self):
-        pass
+        with open("test_diccionario_localidades.txt") as entradaFile:
+            tests = entradaFile.readlines()
+        with open("res_diccionario_localidades.txt") as resFile:
+            res = resFile.readlines()
+        self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
+        for idx in range(len(tests)):
+            self.assertEqual(diccionario_localidades(eval(tests[idx])), eval(res[idx]))
     def test_separar_por (self):
         pass
     def test_descartar (self):
