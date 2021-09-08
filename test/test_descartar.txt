@@ -1,2 +1,4 @@
-[('JOSE DELGADO', 'SANTA ANA', '9', 'M', 'N'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M'),('RAFAEL AGUERO', 'CENTRAL', '10', 'M', 'F'), ('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'N')]
-[('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M')]
+[['JOSE', 'DELGADO', 'SANTA ANA', '9', 'M', 'A'], ['CARMEN', 'CORRALES', 'SANTA ANA', '15', 'F', 'M'],['RAFAEL', 'AGUERO', 'SANTA ANA', '72', 'M', 'N'], ["LUCILA", "PORRAS", "PURISCAL",  "26", "F", "N"]]
+[['JOSE', 'DELGADO', 'SANTA ANA', '5', 'M', 'A'], ['CARMEN', 'CORRALES', 'GOICOECHEA', '8', 'F', 'N'], ['RAFAEL', 'AGUERO', 'CENTRAL', '72', 'M', 'F'], ['MARTA', 'VILLALTA', 'GOICOECHEA', '71', 'F', 'F'], ["ODILI", "SALAZAR", "CENTRAL",  "52", "F", "F"]]
+[['JOSE', 'DELGADO', 'SANTA ANA', '52', 'M', 'A'], ['CARMEN', 'CORRALES', 'SANTA ANA', '32', 'F', 'N'],['RAFAEL', 'AGUERO', 'SANTA ANA', '72', 'M', 'F'], ["LUCILA", "PORRAS", "PURISCAL",  "26", "F", "F"]]
+[['JOSE', 'DELGADO', 'SANTA ANA', '52', 'M', 'A'], ['CARMEN', 'CORRALES', 'GOICOECHEA', '32', 'F', 'M'], ['RAFAEL', 'AGUERO', 'CENTRAL', '72', 'M', 'F'], ['MARTA', 'VILLALTA', 'GOICOECHEA', '71', 'F', 'F'], ["ODILI", "SALAZAR", "CENTRAL",  "52", "F", "F"]]

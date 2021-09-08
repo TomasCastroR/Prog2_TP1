@@ -33,7 +33,13 @@ class TestMatching (unittest.TestCase):
             else:
                 self.assertEqual(separar_por(eval(tests[idx]), "Genero"), eval(res[idx]))
     def test_descartar (self):
-        pass
+        with open("test_descartar.txt") as entradaFile:
+            tests = entradaFile.readlines()
+        with open("res_descartar.txt") as resFile:
+            res = resFile.readlines()
+        self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
+        for idx in range(len(tests)):
+            self.assertEqual(descartar(eval(tests[idx])), eval(res[idx]))
 
 if __name__ == '__main__':
     unittest.main()
