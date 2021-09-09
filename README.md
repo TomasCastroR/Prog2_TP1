@@ -18,5 +18,5 @@ Los archivos recuperados contaban con los siguientes problemas
 ## Ejecución del programa
 En la terminal debe ejercutarse el siguiente comando:
 ```
-python3 TrabajoPractico.py fEntrada fParejas fNoParejas
+python3 matching.py fEntrada fParejas fNoParejas
 ```

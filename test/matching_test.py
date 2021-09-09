@@ -1,7 +1,7 @@
 import sys
 sys.path.append("../")
 import unittest
-from TrabajoPractico import leer_entrada, diccionario_localidades, separar_edad, separar_genero, descartar
+from matching import leer_entrada, diccionario_localidades, separar_edad, separar_genero, descartar
 
 class TestMatching (unittest.TestCase):
     def test_leer_entrada (self):
