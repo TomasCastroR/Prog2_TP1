@@ -1,7 +1,7 @@
 import sys
 sys.path.append("../")
 import unittest
-from TrabajoPractico import leer_entrada, diccionario_localidades, separar_por, descartar
+from TrabajoPractico import leer_entrada, diccionario_localidades, separar_edad, separar_genero, descartar
 
 class TestMatching (unittest.TestCase):
     def test_leer_entrada (self):
@@ -21,17 +21,22 @@ class TestMatching (unittest.TestCase):
         self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
         for idx in range(len(tests)):
             self.assertEqual(diccionario_localidades(eval(tests[idx])), eval(res[idx]))
-    def test_separar_por (self):
-        with open("test_separar.txt") as entradaFile:
+    def test_separar_edad (self):
+        with open("test_separar_edad.txt") as entradaFile:
             tests = entradaFile.readlines()
-        with open("res_separar.txt") as resFile:
+        with open("res_separar_edad.txt") as resFile:
             res = resFile.readlines()
         self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
         for idx in range(len(tests)):
-            if idx % 2 == 0:
-                self.assertEqual(separar_por(eval(tests[idx]), "Edad"), eval(res[idx]))
-            else:
-                self.assertEqual(separar_por(eval(tests[idx]), "Genero"), eval(res[idx]))
+            self.assertEqual(separar_edad(eval(tests[idx])), eval(res[idx]))
+    def test_separar_genero (self):
+        with open("test_separar_genero.txt") as entradaFile:
+            tests = entradaFile.readlines()
+        with open("res_separar_genero.txt") as resFile:
+            res = resFile.readlines()
+        self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
+        for idx in range(len(tests)):
+            self.assertEqual(separar_genero(eval(tests[idx])), eval(res[idx]))
     def test_descartar (self):
         with open("test_descartar.txt") as entradaFile:
             tests = entradaFile.readlines()
