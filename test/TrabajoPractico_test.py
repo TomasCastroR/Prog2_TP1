@@ -13,6 +13,7 @@ class TestMatching (unittest.TestCase):
         for idx in range(len(archivos)):
             path = "test_entrada/" + archivos[idx].strip()
             self.assertEqual(leer_entrada(path), eval(res[idx]))
+    
     def test_diccionario_localidades (self):
         with open("test_diccionario_localidades.txt") as entradaFile:
             tests = entradaFile.readlines()
@@ -21,6 +22,7 @@ class TestMatching (unittest.TestCase):
         self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
         for idx in range(len(tests)):
             self.assertEqual(diccionario_localidades(eval(tests[idx])), eval(res[idx]))
+    
     def test_separar_edad (self):
         with open("test_separar_edad.txt") as entradaFile:
             tests = entradaFile.readlines()
@@ -29,6 +31,7 @@ class TestMatching (unittest.TestCase):
         self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
         for idx in range(len(tests)):
             self.assertEqual(separar_edad(eval(tests[idx])), eval(res[idx]))
+    
     def test_separar_genero (self):
         with open("test_separar_genero.txt") as entradaFile:
             tests = entradaFile.readlines()
@@ -37,6 +40,7 @@ class TestMatching (unittest.TestCase):
         self.assertEqual(len(tests), len(res), "Cantidad de ejemplos y resultados no coincide")
         for idx in range(len(tests)):
             self.assertEqual(separar_genero(eval(tests[idx])), eval(res[idx]))
+    
     def test_descartar (self):
         with open("test_descartar.txt") as entradaFile:
             tests = entradaFile.readlines()
