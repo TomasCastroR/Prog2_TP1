@@ -33,45 +33,43 @@ def escrbir_razon (file, razon):
     elif razon == 3:
         file.write("\nEstas personas no pudieron formar pareja en su localidad\n")
 
-def separar_por (lista, dato):
-    if dato == "Edad":
-        personas11_14 = []
-        personas15_17 = []
-        personas18 = []
-        for persona in lista:
-            if int(persona[3]) < 15:
-                personas11_14 += [persona]
-            elif int(persona[3]) < 18:
-                personas15_17 += [persona]
+def separar_edad (lista):
+    personas11_14 = []
+    personas15_17 = []
+    personas18 = []
+    for persona in lista:
+        if int(persona[3]) < 15:
+            personas11_14 += [persona]
+        elif int(persona[3]) < 18:
+            personas15_17 += [persona]
+        else:
+            personas18 += [persona]
+    return [personas11_14] + [personas15_17] + [personas18]
+
+def separar_genero (lista):
+    heteroM = []
+    heteroF = []
+    homoM= []
+    homoF = []
+    biM = []
+    biF = []
+    for persona in lista:
+        if persona[4] == "M":
+            if persona[5] == "F":
+                heteroM += [persona]
+            elif persona[5] == "M":
+                homoM += [persona]
             else:
-                personas18 += [persona]
-        listaFinal = [personas11_14] + [personas15_17] + [personas18]
-    
-    elif dato == "Genero":
-        heteroM = []
-        heteroF = []
-        homoM= []
-        homoF = []
-        biM = []
-        biF = []
-        for persona in lista:
-            if persona[4] == "M":
-                if persona[5] == "F":
-                    heteroM += [persona]
-                elif persona[5] == "M":
-                    homoM += [persona]
-                else:
-                    biM += [persona]
+                biM += [persona]
+        else:
+            if persona[5] == "M":
+                heteroF += [persona]
+            elif persona[5] == "F":
+                homoF += [persona]
             else:
-                if persona[5] == "M":
-                    heteroF += [persona]
-                elif persona[5] == "F":
-                    homoF += [persona]
-                else:
-                    biF += [persona]
-        listaFinal = [heteroM] + [heteroF] + [homoM] + [homoF] + [biM] + [biF]
-    return listaFinal
-  
+                biF += [persona]
+    return [heteroM] + [heteroF] + [homoM] + [homoF] + [biM] + [biF]
+
 def descartar (lista):
     resultado = [[],[],[],[]]
     for persona in lista:      
@@ -119,10 +117,10 @@ def matching(listaPersonas, fParejas, fNoParejas):
             persona = localidades[localidad][0]
             noParejas[2].append(persona)
         else:
-            listaEdades = separar_por(localidades[localidad],"Edad")
+            listaEdades = separar_edad(localidades[localidad])
             listaEdades_Sexo = []
             for edad in listaEdades:
-                listaEdades_Sexo += [separar_por(edad,"Genero")]
+                listaEdades_Sexo += [separar_genero(edad)]
             for grupo in listaEdades_Sexo:
                 matchHetero(parejas,grupo[0],grupo[1])           #Primero matchea hombres hetero con mujeres hetero
                 matchHomo(parejas, grupo[2])                     #Match de hombres homosexuales
