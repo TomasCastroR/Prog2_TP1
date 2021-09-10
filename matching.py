@@ -5,8 +5,8 @@ def leer_entrada(fEntrada):
         lista = entradaFile.readlines()
     lista = list(map(lambda cadena: cadena.split(","), lista))
     listaPersonas = []
-    for persona in lista:
-        persona = list(map(lambda cadena: cadena.strip(), persona))
+    for [nombre, apellido, localidad, edad, genero, interes] in lista:
+        persona = (nombre.strip(), apellido.strip(), localidad.strip(), edad.strip(), genero.strip(), interes.strip())
         listaPersonas.append(persona)
     return listaPersonas
 
@@ -84,19 +84,19 @@ def descartar (lista):
 
 def matchHetero (parejas, lista1, lista2):
     while lista1!=[] and lista2!=[]:
-        parejas.append([lista1[0],lista2[0]])
+        parejas.append((lista1[0],lista2[0]))
         lista1.remove(lista1[0])
         lista2.remove(lista2[0])
 
 def matchHomo (parejas, lista):
     while lista != [] and len(lista)!= 1:
-        parejas.append([lista[0],lista[1]])
+        parejas.append((lista[0],lista[1]))
         lista.remove(lista[0])
         lista.remove(lista[0])
 
 def escribir_parejas (parejas, fParejas):
     with open(fParejas, "w", encoding="utf-8") as fileParejas:
-        for [persona1, persona2] in parejas:
+        for (persona1, persona2) in parejas:
             nombre1, apellido1, localidad1, edad1, genero1, interes1 = persona1
             nombre2, apellido2, localidad2, edad2, genero2, interes2 = persona2
             fileParejas.write(f"{nombre1}, {apellido1}, {edad1}, {genero1}, {interes1} -- {nombre2}, {apellido2}, {edad2}, {genero2}, {interes2} -- {localidad1}\n")
